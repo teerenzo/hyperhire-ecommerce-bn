@@ -7,6 +7,8 @@ import router from "./router";
 
 dotenv.config();
 
+const PORT = process.env.PORT || 8080;
+
 
 
 const app = express();
@@ -37,7 +39,7 @@ const start = async () => {
         throw new Error("database error!");
     }
 
-    app.listen(8080, () => console.log("server is up and running on port 8080"));
+    app.listen(PORT, () => console.log("server is up and running on port 8080"));
 };
 
 start();
