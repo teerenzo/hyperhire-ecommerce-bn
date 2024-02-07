@@ -12,8 +12,9 @@ export class OrderController {
         const order = await this.orderService.getOrderById(orderId);
         res.json({ message: 'Order found', data: order });
     };
-    public getOrders = async (req: Request, res: Response): Promise<void> => {
-        const orders = await this.orderService.getAllOrders();
+    public getOrders = async (req: any, res: Response): Promise<void> => {
+        const user_id = req.user.id;
+        const orders = await this.orderService.getAllOrders(user_id);
         res.json({ message: 'Orders found', data: orders });
     };
     public addOrder = async (req: any, res: Response): Promise<void> => {

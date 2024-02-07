@@ -6,8 +6,8 @@ export class OrderService {
     constructor() {
         this.orderRepository = new OrderRepository();
     }
-    public getAllOrders = async (): Promise<any> => {
-        return this.orderRepository.getAll();
+    public getAllOrders = async (user_id:number): Promise<any> => {
+        return this.orderRepository.getAll(user_id);
     };
     public getOrderById = async (id: string): Promise<any> => {
         return this.orderRepository.findOrderById(id);

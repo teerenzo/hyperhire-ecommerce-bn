@@ -6,7 +6,7 @@ const orderController = new OrderController();
 
 const router = express.Router();
 
-router.get('/', orderController.getOrders);
+router.get('/',protect, orderController.getOrders);
 router.post('/add',protect, orderController.addOrder);
 router.get('/:id', orderController.getOrder);
 router.put('/:id', orderController.updateOrder);

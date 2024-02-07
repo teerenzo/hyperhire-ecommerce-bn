@@ -4,8 +4,11 @@ import {Order,OrderBook} from "../entity/Order";
 
 
 export class OrderRepository {
-    public getAll = async (): Promise<any> => {
+    public getAll = async (user_id:number): Promise<any> => {
         return Order.findAll({
+            where: {
+                user_id,
+            },
             include: [
                 {
                     model: OrderBook,
