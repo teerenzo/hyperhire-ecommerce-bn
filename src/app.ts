@@ -4,6 +4,8 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import sequelize from "./config/database";
 import router from "./router";
+import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "./swagger_output.json";
 
 dotenv.config();
 
@@ -30,7 +32,7 @@ app.use(json());
 
 app.use("/api/v1", router);
 
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 const start = async () => {
     try {
         await sequelize.authenticate();
