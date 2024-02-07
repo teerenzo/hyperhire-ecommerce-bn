@@ -1,3 +1,4 @@
+import { User } from "../entity/User";
 import { OrderRepository } from "../repository/orderRepository";
 
 export class OrderService {
@@ -13,7 +14,6 @@ export class OrderService {
         return this.orderRepository.findOrderById(id);
     };
     public addOrder = async (orderData: any): Promise<any> => {
-        console.log(orderData);
         const products = orderData.items;
         products.forEach((product: any) => {
             if (!product.id) {
@@ -30,8 +30,9 @@ export class OrderService {
             user_id: orderData.user_id,
             book_id: products[0].id,
             amount: orderData.amount,
-        
+
         });
+      await this.updatePoints(orderData.user_id, orderData.amount);
         const orderId = newOrder.id;
         products.forEach(async (product: any) => {
             const orderBookData = {
@@ -54,4 +55,8 @@ export class OrderService {
     public getOrders = async (page: number, limit: number): Promise<any> => {
         return this.orderRepository.getOrders(page, limit);
     }
+    public updatePoints = async (id: string, points: number): Promise<any> => {
+        const user:any = await User.findByPk(id);
+        return await User.update({ points: 100 }, { where: { id } });
+      }
 }

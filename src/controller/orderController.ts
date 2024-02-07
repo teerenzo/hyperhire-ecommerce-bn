@@ -18,7 +18,6 @@ export class OrderController {
         res.json({ message: 'Orders found', data: orders });
     };
     public addOrder = async (req: any, res: Response): Promise<void> => {
-        console.log(req);
         try {
             const orderData = req.body;    
             orderData.user_id = req.user.id;

@@ -17,4 +17,10 @@ export class UserRepository {
     return await User.findOne({ where: { email } });
   }
 
+  public getPoints = async (id: string): Promise<any> => {
+    return await User.findByPk(id, { attributes: ['points'] });
+  }
+
+
+
 }
